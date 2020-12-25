@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Search</title>
+        <style media="screen">
+          #top-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            /* background-color: pink; */
+          }
+
+          #top-container > a {
+            margin: 5px;
+          }
+
+          #main-container {
+            /* background-color: grey; */
+            height: 700px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+
+          }
+
+          #main-container > div {
+            display: flex;
+            margin: 5px;
+          }
+
+          #input-container {
+            /* background-color: pink; */
+            width: 600px;
+            justify-content: center;
+
+          }
+
+          .formElements {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 18px;
+          }
+
+          #inputText {
+            width: 400px;
+            height: 25px;
+            border-radius: 25px;
+            margin: 0;
+          }
+
+          #inputButton {
+            height: 30px;
+            margin: 0;
+            margin: 10px;
+          }
+
+        </style>
+    </head>
+    <body>
+      <div id="top-container">
+        <a href="https://www.google.com/imghp">Images</a>
+        <a href="https://www.google.com/advanced_search">Advanced Search</a>
+      </div>
+
+
+
+      <div id="main-container">
+        <div >
+          <img alt="ホリデーシーズン" src="https://www.google.com/logos/doodles/2020/december-holidays-days-2-30-6753651837108830.3-law.gif">
+        </div>
+        <br>
+        <div id="input-container">
+          <form class="formElements" action="https://google.com/search">
+              <input id="inputText" type="text" name="q">
+              <input id="inputButton" type="submit" value="Google Search">
+          </form>
+        </div>
+
+      </div>
+
+    </body>
+</html>
