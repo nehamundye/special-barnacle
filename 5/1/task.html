@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Tasks</title>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+
+        // By default, the submit button is disabled
+        document.querySelector('#submit').disabled = true;
+
+        // to listen to user when he/she moves out of input-> then enable the submit button
+        document.querySelector('#task').onkeyup = () => {
+          if (document.querySelector('#task').value.length > 0) {
+            document.querySelector('#submit').disabled = false;
+          } else {
+            document.querySelector('#submit').disabled = true;
+          }
+
+        }
+
+        document.querySelector('form').onsubmit = () => {
+          const task = document.querySelector('#task').value;
+
+          // create a new element
+          const li = document.createElement('li');
+          li.innerHTML = task;
+
+          // add the new element to DOM/ul
+          document.querySelector('#tasks').append(li);
+
+          // clear out input field
+          document.querySelector('#task').value = '';
+
+          // get the submit button, make its disbaled property to true
+          document.querySelector('#submit').disaled = true;
+
+          // stop form from submitting
+          return false;
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Tasks</h1>
+    <ul id="tasks">
+
+    </ul>
+
+    <form>
+      <input id="task" placeholder="New Task", type="text">
+      <input id="submit" type="submit">
+    </form>
+
+  </body>
+</html>
