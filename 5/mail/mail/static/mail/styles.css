@@ -1,0 +1,13 @@
+textarea {
+    min-height: 400px;
+}
+
+#emails-view > div >div {
+    border-collapse: collapse;
+    border:1px solid;
+  }
+
+a:link {
+    text-decoration: none;
+  }
+

@@ -1,0 +1,107 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+{% if user.is_authenticated %}
+ <form class="" action="{% url 'addorremovewatchlist' listing_details.listing_id %}" method="post">
+   {% csrf_token %}
+   <button type="submit" class="btn btn-secondary">{{ addOrRmoveButton }}</button>
+ </form>
+ <br>
+
+  {% if listing_details.isActive %}
+   <form class="" action="{% url 'bid' listing_details.listing_id %}" method="post">
+     {% csrf_token %}
+      Bid: {{ BidForm.bid }}
+      <input type="submit">
+   </form>
+  {% endif %}
+
+     <!-- If the loggedin user viewing listingdetails is the one who created the listing, show him CLOSE auction button -->
+     {% if user.username == listing_details.user and listing_details.isActive %}
+      <form class="" action="{% url 'closeauction' listing_details.listing_id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" name="button">Close Auction</button>
+      </form>
+     {% endif %}
+
+     {% if user.username != listing_details.winner and listing_details.winner %}
+        <h1>Winner is: {{listing_details.winner}}</h1>
+     {% endif %}
+
+     {% if user.username == listing_details.winner and listing_details.winner %}
+        <h1>Congratulations {{listing_details.winner}}! You won the auction!</h1>
+     {% endif %}
+
+{% endif %}
+
+
+
+{% if messages %}
+    {% for message in messages %}
+        <!-- <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div> -->
+        {% if message.tags == "success" %}
+          <div class="alert alert-success" role="alert">
+            {{ message }}
+            <!-- {{ message.tags }} -->
+          </div>
+        {% endif  %}
+
+        {% if message.tags == "error" %}
+          <div class="alert alert-danger" role="alert">
+            {{ message }}
+            <!-- {{ message.tags }} -->
+          </div>
+        {% endif  %}
+
+    {% endfor %}
+{% endif %}
+
+ <br>
+ {{listing_details}}
+ <br>
+ Listing ID: {{listing_details.listing_id}}
+  <br>
+ Title: {{listing_details.title}}
+  <br>
+ Description: {{listing_details.description}}
+  <br>
+ Start_bid: {{listing_details.start_bid}}
+  <br>
+ isActive: {{listing_details.isActive}}
+  <br>
+ last_updated_on: {{listing_details.last_updated_on}}
+  <br>
+ Category: {{listing_details.category}}
+  <br>
+ Created By: {{listing_details.user}}
+  <br>
+
+    {% if latest_bid %}
+      Lastest_Bid: {{latest_bid}}
+    {% endif %}
+
+  <br>
+
+{% if user.is_authenticated %}
+  {% if listing_details.isActive %}
+   <form class="" action="{% url 'addcomment' listing_details.listing_id %}" method="post">
+     {% csrf_token %}
+     <p>Comment:</p>
+       {{ CommentForm.comment }}
+       <br>
+      <input type="submit" value="Add Comment">
+   </form>
+  {% endif %}
+
+  <h6>Customer Review</h6>
+  {% for comment in comments %}
+
+    <ul>
+      <li>{{comment}}</li>
+    </ul>
+  {% endfor %}
+{% endif %}
+
+
+{% endblock %}
